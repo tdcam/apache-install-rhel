@@ -17,11 +17,10 @@
       ansible.builtin.copy:
         src: wordpress.conf
         dest: /etc/httpd/conf.d/wordpress.conf
-    - name: start httpd
-      ansible.builtin.service:
-        name: httpd
-        state: started
-        enabled: true
+    - name: deploy wp-config.php
+      ansible.builtin.copy:
+        src: wp-config.php
+        dest: /etc/wordpress/wp-config.php
     - name: open firewall port 80
       ansible.posix.firewalld:
         service: http
@@ -34,3 +33,8 @@
         permanent: true
         state: enabled
         immediate: true
+    - name: start httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
