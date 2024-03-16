@@ -1,0 +1,23 @@
+---
+- name: Tear Web Environment Down
+  hosts: all
+  tasks:
+    - name: remove httpd and related files
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - mod_ssl
+        autoremove: true
+        state: absent
+    - name: remove firewall rules 80
+      ansible.posix.firewalld:
+        service: http
+        state: disabled
+        immediate: true
+        permanent: true
+    - name: remove firewall rules 443
+      ansible.posix.firewalld:
+        service: https
+        state: disabled
+        immediate: true
+        permanent: true
