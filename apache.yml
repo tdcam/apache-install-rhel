@@ -36,5 +36,5 @@
     - name: start httpd
       ansible.builtin.service:
         name: httpd
-        state: started
+        state: restarted
         enabled: true
