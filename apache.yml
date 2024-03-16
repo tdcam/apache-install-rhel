@@ -13,6 +13,10 @@
       ansible.builtin.copy:
         src: files/index.html
         dest: /var/www/html/index.html
+    - name: deploy wordpress.conf
+      ansible.builtin.copy:
+        src: wordpress.conf
+        dest: /etc/httpd/conf.d/wordpress.conf
     - name: start httpd
       ansible.builtin.service:
         name: httpd
